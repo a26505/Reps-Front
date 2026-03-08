@@ -15,9 +15,13 @@ spec:
     spec:
       containers:
       - name: reps-frontend
-        image: <danic19>/reps-frontend:latest
+<<<<<<< HEAD
+        image: danic19/reps-frontend:latest
+=======
+        image: danic19/reps-frontend:latest
+>>>>>>> main-new
         ports:
-        - containerPort: 5173
+        - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
@@ -29,5 +33,5 @@ spec:
     app: reps-frontend
   ports:
     - protocol: TCP
-      port: 5173
-      targetPort: 5173
+      port: 80
+      targetPort: 80
