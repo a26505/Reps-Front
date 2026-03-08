@@ -17,7 +17,7 @@ spec:
       - name: reps-frontend
         image: <tu_usuario_dockerhub>/reps-frontend:latest
         ports:
-        - containerPort: 5173
+        - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
@@ -29,5 +29,5 @@ spec:
     app: reps-frontend
   ports:
     - protocol: TCP
-      port: 5173
-      targetPort: 5173
+      port: 80
+      targetPort: 80
