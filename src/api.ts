@@ -139,4 +139,19 @@ export const adminApi = {
     eliminarRutina: (id: number) => api.delete(`/Rutinas/admin/${id}`),
 };
 
+// ─── CONTACTO (AWS Lambda + SNS) ─────────────────────────────────────
+// Esta API llama directamente a AWS API Gateway con tu dominio personalizado
+export const contactoApi = {
+    // Tu endpoint de API Gateway
+    enviarMensaje: (data: { name: string; email: string; subject: string; message: string }) => {
+        const LAMBDA_ENDPOINT = import.meta.env.VITE_LAMBDA_ENDPOINT || 'https://gw73zc4hu2.execute-api.us-east-1.amazonaws.com/prod';
+        
+        return axios.post(LAMBDA_ENDPOINT, data, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    }
+};
+
 export default api;
