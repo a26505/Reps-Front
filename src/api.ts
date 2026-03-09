@@ -140,13 +140,11 @@ export const adminApi = {
 };
 
 // ─── CONTACTO (AWS Lambda + SNS) ─────────────────────────────────────
-// Esta API llama directamente a AWS API Gateway con tu dominio personalizado
+// Esta API llama al proxy de nginx que reenvía a AWS Lambda
 export const contactoApi = {
-    // Tu endpoint de API Gateway
+    // El proxy de nginx /contact/ reenvía a API Gateway
     enviarMensaje: (data: { name: string; email: string; subject: string; message: string }) => {
-        const LAMBDA_ENDPOINT = import.meta.env.VITE_LAMBDA_ENDPOINT || 'https://gw73zc4hu2.execute-api.us-east-1.amazonaws.com/prod';
-        
-        return axios.post(LAMBDA_ENDPOINT, data, {
+        return axios.post('/contact', data, {
             headers: {
                 'Content-Type': 'application/json'
             }
