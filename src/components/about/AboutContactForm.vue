@@ -43,6 +43,7 @@ const submitForm = async () => {
         isSubmitting.value = false;
     }
 };
+</script>
 
 <template>
   <div class="contact-form-height h-full">
