@@ -15,7 +15,7 @@ const scrollToFeatures = () => {
 </script>
 
 <template>
-<section id="home" class="relative min-h-[60vh] sm:min-h-screen flex items-start pb-8 lg:items-center pt-20 sm:pt-24 md:pt-24 lg:pt-32 overflow-visible lg:overflow-hidden bg-black">
+<section id="home" class="relative min-h-[60vh] sm:min-h-screen flex items-end pb-0 lg:items-center pt-20 sm:pt-24 md:pt-24 lg:pt-32 overflow-visible lg:overflow-hidden bg-black">
         
         <!-- DECORATION LAYER (Z-INDEX 1) -->
         <!-- Red circle decorations - Positioned behind athlete -->
@@ -27,7 +27,7 @@ const scrollToFeatures = () => {
 
 <div class="container mx-auto px-5 sm:px-6 py-6 lg:py-12 relative z-10 w-full h-full">
             <!-- GRID LAYER (Z-INDEX 10 for text, Z-INDEX 20 for image) -->
-            <div class="grid lg:grid-cols-2 gap-6 lg:gap-12 items-start lg:items-center h-full">
+<div class="grid lg:grid-cols-2 gap-6 lg:gap-12 items-center h-full">
                 
                 <!-- Left Content (Text) - Z-INDEX 30 -->
 <div class="max-w-2xl relative z-30 lg:-ml-8 pl-4">
@@ -76,7 +76,7 @@ const scrollToFeatures = () => {
                 </div>
 
 <!-- Right Content (Athlete Image) - Z-INDEX 20 -->
-                <div class="hidden lg:flex relative justify-center lg:justify-end -mb-0 z-20 pointer-events-none">
+<div class="relative flex justify-center lg:justify-end -mb-0 z-20 pointer-events-none">
                         <img 
                             :src="athleteImageUrl" 
                             alt="Athlete" 
@@ -277,6 +277,6 @@ const scrollToFeatures = () => {
     .athlete-image { transform: scale(1.25) translateY(112px); } /* Tablet */
 }
 @media (min-width: 1024px) {
-    .athlete-image { transform: scale(1.65) translateY(20px) translateX(70px); } /* Desktop - Lowered further */
+    .athlete-image { transform: scale(1.65) translateY(20px) translateX(70px); } /* Desktop - Original */
 }
 </style> 

@@ -74,7 +74,7 @@
               <!-- IZQUIERDA: AVATAR + INFO BÁSICA -->
               <div class="flex items-center gap-4 min-w-[250px]">
                 <div class="relative">
-                <div class="w-16 h-16 rounded-full bg-[#0F0F0F] border-2 border-[#DC2626]/20 flex items-center justify-center overflow-hidden shadow-inner">
+<div class="w-16 h-16 rounded-full bg-[#0F0F0F] border-2 border-[#DC2626]/20 flex items-center justify-center overflow-hidden shadow-inner">
                     <img :src="getAvatarUrl(friend.avatarId)" class="w-full h-full object-cover scale-110" />
                   </div>
                   <span class="absolute bottom-0 right-0 w-4 h-4 rounded-full border-2 border-[#111827]" :class="friend.online ? 'bg-[#22C55E]' : 'bg-[#6B7280]'"></span>
