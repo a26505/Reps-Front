@@ -1,4 +1,3 @@
-# Manifiesto para el frontend
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -15,9 +14,7 @@ spec:
     spec:
       containers:
       - name: reps-frontend
-        
         image: danic19/reps-frontend:latest
-
         ports:
         - containerPort: 80
 ---
@@ -26,7 +23,7 @@ kind: Service
 metadata:
   name: reps-frontend-service
 spec:
-  type: ClusterIP
+  type: LoadBalancer # <--- Esto es lo que te da la URL externa
   selector:
     app: reps-frontend
   ports:
