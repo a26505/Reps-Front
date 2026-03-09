@@ -1,4 +1,4 @@
-name: Build and Deploy Frontend to Kubernetes
+name: Build and Push Frontend to Docker Hub
 
 on:
   push:
@@ -9,8 +9,6 @@ on:
 env:
   REGISTRY: docker.io
   IMAGE_NAME: danic19/reps-frontend
-  AWS_REGION: us-east-1
-  EKS_CLUSTER_NAME: Demo-Cluster
 
 jobs:
   build-and-push:
@@ -38,38 +36,4 @@ jobs:
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
-
-  deploy:
-    name: Deploy to Kubernetes
-    needs: build-and-push
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
-
-      - name: Update kubeconfig
-        run: |
-          aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER_NAME }}
-
-      - name: Deploy Frontend
-        run: |
-          kubectl apply -f k8s-frontend.yaml
-          echo "Waiting for Frontend to be ready..."
-          kubectl wait --for=condition=available --timeout=120s deployment/reps-frontend-deployment
-
-      - name: Verify Frontend
-        run: |
-          echo "=== Frontend Pods ==="
-          kubectl get pods -l app=reps-frontend
-          echo ""
-          echo "=== Frontend Logs ==="
-          kubectl logs -l app=reps-frontend --tail=20
 
