@@ -142,9 +142,9 @@ export const adminApi = {
 // ─── CONTACTO (AWS Lambda + SNS) ─────────────────────────────────────
 // Esta API llama al proxy de nginx que reenvía a AWS Lambda
 export const contactoApi = {
-    // El proxy de nginx /contact/ reenvía a API Gateway
+    // El proxy de nginx /prod/ reenvía a API Gateway
     enviarMensaje: (data: { name: string; email: string; subject: string; message: string }) => {
-        return axios.post('/contact', data, {
+        return axios.post('/prod', data, {
             headers: {
                 'Content-Type': 'application/json'
             }
