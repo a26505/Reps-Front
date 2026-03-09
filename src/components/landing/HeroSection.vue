@@ -15,7 +15,7 @@ const scrollToFeatures = () => {
 </script>
 
 <template>
-    <section id="home" class="relative min-h-screen flex items-end pb-0 lg:items-center pt-32 md:pt-24 overflow-hidden bg-black">
+<section id="home" class="relative min-h-[60vh] sm:min-h-screen flex items-start pb-8 lg:items-center pt-20 sm:pt-24 md:pt-24 lg:pt-32 overflow-visible lg:overflow-hidden bg-black">
         
         <!-- DECORATION LAYER (Z-INDEX 1) -->
         <!-- Red circle decorations - Positioned behind athlete -->
@@ -25,34 +25,34 @@ const scrollToFeatures = () => {
         <!-- Gradient Bottom moved to back - Z-INDEX 0 -->
         <div class="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-black to-transparent z-0 pointer-events-none"></div>
 
-        <div class="container mx-auto px-6 py-12 lg:py-12 relative z-10 w-full h-full"> 
+<div class="container mx-auto px-5 sm:px-6 py-6 lg:py-12 relative z-10 w-full h-full">
             <!-- GRID LAYER (Z-INDEX 10 for text, Z-INDEX 20 for image) -->
-            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-end lg:items-center h-full">
+            <div class="grid lg:grid-cols-2 gap-6 lg:gap-12 items-start lg:items-center h-full">
                 
                 <!-- Left Content (Text) - Z-INDEX 30 -->
-                <div class="max-w-2xl relative z-30 lg:-ml-8">
-                    <h1 class="text-h1-huge font-weight-black mb-6 lg:mb-8 text-white uppercase">
+<div class="max-w-2xl relative z-30 lg:-ml-8 pl-4">
+                    <h1 class="text-h1-huge font-weight-black mb-4 lg:mb-8 text-white uppercase">
                         REPS, UNA<br />
                         NUEVA FORMA<br />
                         DE <span class="text-red-600">ENTRENAR</span>
                     </h1>
                     
-                    <p class="text-base md:text-lg lg:text-xl text-gray-400 max-w-xl leading-relaxed mb-8 lg:mb-12 font-weight-light uppercase" style="letter-spacing: 1px; line-height: 1.625;">
+<p class="text-xs sm:text-sm md:text-lg lg:text-xl text-gray-400 max-w-xl leading-relaxed mb-4 lg:mb-12 font-weight-light uppercase" style="letter-spacing: 1px; line-height: 1.625;">
                         UNA PLATAFORMA INTELIGENTE<br />
                         PARA ALCANZAR TU MÁXIMO POTENCIAL
                     </p>
 
-                    <div class="flex flex-row gap-4 mb-8 lg:mb-0">
-                        <button 
+<div class="flex flex-row gap-2 sm:gap-4 mb-6 lg:mb-0">
+<button 
                             @click="$emit('open-signup')"
-                            class="bg-red-600 hover:bg-red-700 text-white px-8 py-6 text-lg rounded-full group flex items-center justify-center transition-colors font-bold"
+                            class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 sm:px-8 md:px-8 md:py-6 text-sm sm:text-base md:text-lg rounded-full group flex items-center justify-center transition-colors font-bold"
                         >
                             COMENZAR AHORA
-                            <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                            <svg class="w-3 h-3 ml-1 sm:w-4 sm:h-4 sm:ml-2 group-hover:translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                         </button>
                         <button 
                             @click="scrollToFeatures"
-                            class="border-2 border-white hover:bg-white/10 px-8 py-6 text-lg rounded-full text-white font-bold transition-colors"
+                            class="border-2 border-white hover:bg-white/10 px-3 py-2 sm:px-8 sm:py-3 md:px-8 md:py-6 text-sm sm:text-base md:text-lg rounded-full text-white font-bold transition-colors"
                         >
                             VER MÁS
                         </button>
@@ -75,8 +75,8 @@ const scrollToFeatures = () => {
                     </div>
                 </div>
 
-                <!-- Right Content (Athlete Image) - Z-INDEX 20 -->
-                <div class="relative flex justify-center lg:justify-end -mb-0 z-20 pointer-events-none">
+<!-- Right Content (Athlete Image) - Z-INDEX 20 -->
+                <div class="hidden lg:flex relative justify-center lg:justify-end -mb-0 z-20 pointer-events-none">
                         <img 
                             :src="athleteImageUrl" 
                             alt="Athlete" 
@@ -250,10 +250,13 @@ const scrollToFeatures = () => {
 
 /* Exact Text Matches */
 .text-h1-huge {
-    font-size: 3.5rem;
-    line-height: 0.95;
+    font-size: 2rem;
+    line-height: 1.1;
     letter-spacing: -0.025em;
-    margin-left: -1rem; /* Pull text slightly left on mobile */
+    margin-left: 0;
+}
+@media (min-width: 640px) {
+    .text-h1-huge { font-size: 2.5rem; margin-left: 0; }
 }
 @media (min-width: 768px) {
     .text-h1-huge { font-size: 3.75rem; margin-left: 0; }
@@ -262,7 +265,7 @@ const scrollToFeatures = () => {
     .text-h1-huge { 
         font-size: 6rem; 
         line-height: 0.95; 
-        margin-left: 0; /* Reset - handled by container now */
+        margin-left: 0;
     }
 }
 

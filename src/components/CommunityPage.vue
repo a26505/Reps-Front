@@ -74,8 +74,8 @@
               <!-- IZQUIERDA: AVATAR + INFO BÁSICA -->
               <div class="flex items-center gap-4 min-w-[250px]">
                 <div class="relative">
-                  <div class="w-16 h-16 rounded-full bg-[#1F2937] border-2 border-[#DC2626]/20 flex items-center justify-center overflow-hidden">
-                    <img :src="getAvatarUrl(friend.avatarId)" class="w-full h-full object-cover" />
+                <div class="w-16 h-16 rounded-full bg-[#0F0F0F] border-2 border-[#DC2626]/20 flex items-center justify-center overflow-hidden shadow-inner">
+                    <img :src="getAvatarUrl(friend.avatarId)" class="w-full h-full object-cover scale-110" />
                   </div>
                   <span class="absolute bottom-0 right-0 w-4 h-4 rounded-full border-2 border-[#111827]" :class="friend.online ? 'bg-[#22C55E]' : 'bg-[#6B7280]'"></span>
                 </div>
@@ -377,8 +377,8 @@
 
                 <!-- Resultado búsqueda -->
                 <div v-if="searchResult" class="bg-[#1F2937]/50 border border-[#374151] rounded-[12px] p-5 flex gap-4 animate-in fade-in slide-in-from-top-2">
-                    <div class="w-16 h-16 rounded-full bg-[#1F2937] border border-[#374151] flex items-center justify-center overflow-hidden">
-                        <img :src="getAvatarUrl(searchResult.avatarId)" class="w-full h-full object-cover" />
+                    <div class="w-16 h-16 rounded-full bg-[#0F0F0F] border-2 border-[#374151] flex items-center justify-center overflow-hidden shadow-inner">
+                        <img :src="getAvatarUrl(searchResult.avatarId)" class="w-full h-full object-cover scale-110" />
                     </div>
                     <div>
                         <div class="text-[18px] font-bold text-white">{{ searchResult.name }}</div>
