@@ -9,6 +9,8 @@ on:
 env:
   REGISTRY: docker.io
   IMAGE_NAME: danic19/reps-frontend
+  AWS_REGION: us-east-1
+  EKS_CLUSTER_NAME: Demo-Cluster
 
 jobs:
   build-and-push:
@@ -46,10 +48,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up kubectl
-        uses: azure/k8s-set-context@v4
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          kubeconfig: ${{ secrets.KUBE_CONFIG }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Update kubeconfig
+        run: |
+          aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER_NAME }}
 
       - name: Deploy Frontend
         run: |
