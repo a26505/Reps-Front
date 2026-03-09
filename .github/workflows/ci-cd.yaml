@@ -1,16 +1,67 @@
-name: CI - Frontend
+name: Build and Deploy Frontend to Kubernetes
+
 on:
   push:
-    branches: [ "main", "master" ]
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  REGISTRY: docker.io
+  IMAGE_NAME: danic19/reps-frontend
+
 jobs:
-  build:
+  build-and-push:
+    name: Build and Push Frontend
     runs-on: ubuntu-latest
+    
     steps:
-    - uses: actions/checkout@v3
-    - uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-    - run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/reps-frontend:latest .
-        docker push ${{ secrets.DOCKER_USERNAME }}/reps-frontend:latest
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push Frontend
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ env.REGISTRY }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    name: Deploy to Kubernetes
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up kubectl
+        uses: azure/k8s-set-context@v4
+        with:
+          kubeconfig: ${{ secrets.KUBE_CONFIG }}
+
+      - name: Deploy Frontend
+        run: |
+          kubectl apply -f k8s-frontend.yaml
+          echo "Waiting for Frontend to be ready..."
+          kubectl wait --for=condition=available --timeout=120s deployment/reps-frontend-deployment
+
+      - name: Verify Frontend
+        run: |
+          echo "=== Frontend Pods ==="
+          kubectl get pods -l app=reps-frontend
+          echo ""
+          echo "=== Frontend Logs ==="
+          kubectl logs -l app=reps-frontend --tail=20
+
