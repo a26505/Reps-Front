@@ -279,4 +279,4 @@ const scrollToFeatures = () => {
 @media (min-width: 1024px) {
     .athlete-image { transform: scale(1.65) translateY(20px) translateX(70px); } /* Desktop - Lowered further */
 }
-</style>
+</style> 
