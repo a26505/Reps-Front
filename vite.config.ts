@@ -3,7 +3,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vuetify from 'vite-plugin-vuetify'
 
-// https://vitejs.dev/config/
+//https://vitejs.dev/config/
 export default defineConfig({
     plugins: [
         vue(),
@@ -20,7 +20,11 @@ export default defineConfig({
         allowedHosts: ['.amazonaws.com'], 
         proxy: {
             '/api': {
+<<<<<<< HEAD
                 target: 'http://10.100.194.25:80', 
+=======
+               target: 'http://reps-backend-service:5000',
+>>>>>>> main-new
                 changeOrigin: true,
                 secure: false,
             }
