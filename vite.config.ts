@@ -17,6 +17,9 @@ export default defineConfig({
     server: {
         port: 5173,
         host: true,
+        allowedHosts: [
+            'ac7bf30a489c44f90a400d466a7e0def-1826813329.us-east-1.elb.amazonaws.com'
+        ],
         proxy: {
             '/api': {
                 target: 'http://127.0.0.1:5148',
