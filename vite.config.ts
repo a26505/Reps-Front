@@ -19,7 +19,8 @@ export default defineConfig({
     allowedHosts: ['.amazonaws.com'],
     proxy: {
       '/api': {
-        target: 'http://reps-backend-service:5000',
+        // Apuntamos al puerto 8080 que es el que dice tu log
+        target: 'http://reps-backend-service:8080', 
         changeOrigin: true,
         secure: false,
       }
