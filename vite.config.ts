@@ -20,7 +20,7 @@ export default defineConfig({
         allowedHosts: ['.amazonaws.com'], 
         proxy: {
             '/api': {
-                target: 'http://backend-service:80', 
+                target: 'http://10.100.194.25:80', 
                 changeOrigin: true,
                 secure: false,
             }
