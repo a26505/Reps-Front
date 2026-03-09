@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const emit = defineEmits(['open-signup']);
+
 const freeFeatures = [
     "Rutinas básicas",
     "Seguimiento de progreso",
@@ -15,6 +17,10 @@ const proFeatures = [
     "Calentamiento inteligente",
     "Descuentos exclusivos"
 ];
+
+const handleCtaClick = () => {
+    emit('open-signup');
+};
 </script>
 
 <template>
@@ -50,8 +56,8 @@ const proFeatures = [
                         </div>
                     </div>
 
-                    <button class="cta-button free-button">
-                        EMPEZAR GRATIS
+                    <button class="cta-button free-button" @click="handleCtaClick">
+                        EMPEZAR Gratis
                     </button>
                 </div>
 
@@ -83,7 +89,7 @@ const proFeatures = [
                         </div>
                     </div>
 
-                    <button class="cta-button pro-button">
+                    <button class="cta-button pro-button" @click="handleCtaClick">
                         HAZTE PRO
                     </button>
                 </div>
@@ -305,3 +311,4 @@ const proFeatures = [
 .divider { display: none; }
 
 </style>
+
