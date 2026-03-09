@@ -3,7 +3,6 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vuetify from 'vite-plugin-vuetify'
 
-// https://vitejs.dev/config/
 export default defineConfig({
     plugins: [
         vue(),
@@ -17,10 +16,10 @@ export default defineConfig({
     server: {
         port: 5173,
         host: true,
-        allowedHosts: ['.amazonaws.com'], // <--- Solución definitiva para el bloqueo de host
+        allowedHosts: ['.amazonaws.com'], 
         proxy: {
             '/api': {
-                target: 'http://127.0.0.1:5148',
+                target: 'http://backend-service', // <--- NOMBRE DEL SERVICE EN K8S
                 changeOrigin: true,
                 secure: false,
             }
