@@ -15,11 +15,9 @@ spec:
     spec:
       containers:
       - name: reps-frontend
-<<<<<<< HEAD
+        
         image: danic19/reps-frontend:latest
-=======
-        image: danic19/reps-frontend:latest
->>>>>>> main-new
+
         ports:
         - containerPort: 80
 ---
