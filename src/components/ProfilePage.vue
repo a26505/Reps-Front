@@ -119,8 +119,8 @@
             
             <div class="flex flex-col gap-3 mb-4">
               <div v-for="friend in friends" :key="friend.name" class="flex items-center gap-3 bg-[rgba(31,41,55,0.5)] border border-[#374151] rounded-[12px] p-3 transition-all duration-300 hover:border-[#4B5563]">
-                <div class="w-[48px] h-[48px] rounded-full border border-white/10 flex items-center justify-center text-[24px] overflow-hidden">
-                  <img :src="getAvatarUrl(friend.avatarId)" class="w-full h-full object-cover bg-[#1F2937]" />
+                <div class="w-[48px] h-[48px] rounded-full border border-white/10 flex items-center justify-center text-[24px] overflow-hidden bg-[#0F0F0F]">
+                  <img :src="getAvatarUrl(friend.avatarId)" class="w-full h-full object-cover scale-110" />
                 </div>
                 <div class="flex-1">
                   <div class="text-[14px] font-semibold text-white mb-1">{{ friend.name }}</div>

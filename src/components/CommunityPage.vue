@@ -74,8 +74,8 @@
               <!-- IZQUIERDA: AVATAR + INFO BÁSICA -->
               <div class="flex items-center gap-4 min-w-[250px]">
                 <div class="relative">
-                  <div class="w-16 h-16 rounded-full bg-[#1F2937] border-2 border-[#DC2626]/20 flex items-center justify-center overflow-hidden">
-                    <img :src="getAvatarUrl(friend.avatarId)" class="w-full h-full object-cover" />
+<div class="w-16 h-16 rounded-full bg-[#0F0F0F] border-2 border-[#DC2626]/20 flex items-center justify-center overflow-hidden shadow-inner">
+                    <img :src="getAvatarUrl(friend.avatarId)" class="w-full h-full object-cover scale-110" />
                   </div>
                   <span class="absolute bottom-0 right-0 w-4 h-4 rounded-full border-2 border-[#111827]" :class="friend.online ? 'bg-[#22C55E]' : 'bg-[#6B7280]'"></span>
                 </div>
@@ -377,8 +377,8 @@
 
                 <!-- Resultado búsqueda -->
                 <div v-if="searchResult" class="bg-[#1F2937]/50 border border-[#374151] rounded-[12px] p-5 flex gap-4 animate-in fade-in slide-in-from-top-2">
-                    <div class="w-16 h-16 rounded-full bg-[#1F2937] border border-[#374151] flex items-center justify-center overflow-hidden">
-                        <img :src="getAvatarUrl(searchResult.avatarId)" class="w-full h-full object-cover" />
+                    <div class="w-16 h-16 rounded-full bg-[#0F0F0F] border-2 border-[#374151] flex items-center justify-center overflow-hidden shadow-inner">
+                        <img :src="getAvatarUrl(searchResult.avatarId)" class="w-full h-full object-cover scale-110" />
                     </div>
                     <div>
                         <div class="text-[18px] font-bold text-white">{{ searchResult.name }}</div>
@@ -576,9 +576,11 @@ import { useRouter } from 'vue-router';
 import Sidebar from './Sidebar.vue';
 import { usuariosApi, rankingApi, logrosApi, rutinasApi } from '../api';
 import { useAuthStore } from '../stores/auth';
+import { useUiStore } from '../stores/ui';
 import { getErrorMessage } from '../utils/error-handler';
 
 const authStore = useAuthStore();
+const uiStore = useUiStore();
 const router = useRouter();
 
 onMounted(async () => {
@@ -613,7 +615,7 @@ const verRutina = async (routine: any) => {
         routineDetailExercises.value = res.data?.ejercicios || [];
     } catch (e) {
         console.error("No se pudo cargar el detalle", e);
-        alert("No se pudo cargar la información de los ejercicios.");
+        uiStore.showToast("No se pudo cargar la información de los ejercicios.", "error");
         selectedRoutineForView.value = null;
     } finally {
         isLoadingDetail.value = false;
@@ -861,11 +863,11 @@ const copyRoutine = async (routine: any) => {
   try {
       await rutinasApi.copiar(routine.id);
       routine.copied = true;
-      alert("¡Rutina guardada! Te redirigimos a tus rutinas de comunidad.");
+      uiStore.showToast("¡Rutina guardada!", "success");
       router.push({ path: '/workouts', query: { tab: 'community_saved' } });
   } catch (e) {
       console.error(e);
-      alert("No se pudo guardar la rutina.");
+      uiStore.showToast("No se pudo guardar la rutina.", "error");
   } finally {
       isCopying.value = false;
   }
@@ -933,8 +935,7 @@ const sendRequest = async () => {
     }, 1500);
   } catch (e: any) {
     console.error('Error sending friend request:', e);
-    // Podríamos añadir una notificación o alerta con getErrorMessage(e)
-    alert(getErrorMessage(e));
+    uiStore.showToast(getErrorMessage(e), "error");
     searchError.value = true;
     searchResult.value = null;
   } finally {

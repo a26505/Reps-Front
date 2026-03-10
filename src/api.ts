@@ -139,4 +139,17 @@ export const adminApi = {
     eliminarRutina: (id: number) => api.delete(`/Rutinas/admin/${id}`),
 };
 
+// ─── CONTACTO (AWS Lambda + SNS) ─────────────────────────────────────
+// Esta API llama al proxy de nginx que reenvía a AWS Lambda
+export const contactoApi = {
+    // El proxy de nginx /prod/ reenvía a API Gateway
+    enviarMensaje: (data: { name: string; email: string; subject: string; message: string }) => {
+        return axios.post('/prod', data, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    }
+};
+
 export default api;
